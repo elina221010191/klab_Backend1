@@ -1,13 +1,16 @@
 import express from 'express';
 import mongoose from 'mongoose';
-import dotenv from "dotenv"
+import dotenv from "dotenv";
+import bodyParser from "body-parser";  // ✅ Correct casing
+
 import mainRouter from './routes/indexRouting.js';
 dotenv.config();
 const db_user=process.env.DB_USER;
 const db_name=process.env.DB_NAME;
-const port=process.env.PORT||3000;
+const port=process.env.PORT||3000; 
 const db_pass=process.env.DB_PASS
 const app=express();
+app.use(bodyParser.json());
 app.use("/",mainRouter)
 
 const dbUri = `mongodb+srv://${db_user}:${db_pass}@cluster0.wkv1d.mongodb.net/${db_name}`;
