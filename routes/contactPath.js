@@ -1,11 +1,13 @@
-import {createContact,ListContact,FindContactById,DeleteByID,getAllContact} from "../controllers/contactController.js";
+import {createContact,ListContact,FindContactById,DeleteByID,getAllContact,deleteContactById,getContactById,updateContactById} from "../controllers/contactController.js";
 import express from "express";
 
 const contactRouter=express();
 
 contactRouter.post("/createContact",createContact);
-contactRouter.get("/getcontact",ListContact)
-contactRouter.get("/findcontactbyId/:id",FindContactById)
 contactRouter.get("/DeletecontactbyId/:id",DeleteByID)
 contactRouter.get("/getAllContact/",getAllContact)
+contactRouter.get("/getContactById/:id",getContactById)
+contactRouter.delete("/deleteContactById/:id",deleteContactById)
+contactRouter.put("/updateContactById/:id",updateContactById)
+
 export default contactRouter;
