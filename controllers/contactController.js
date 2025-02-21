@@ -6,10 +6,26 @@ const newContact=new Contact({names,email,subject,message,phone});
 await newContact.save();
 res.status(201).json({success: true,message: "contact created successfully",Contact: newContact});
 
-
-
     }catch(error){
         res.status(500).json({success: false,message: "Server Error",error: error.message});
 
+    }
+}
+
+export const ListContact=async(req,res)=>
+{
+    try{
+    const foundContact= await Contact.find();
+    return res.status(200).json(
+        {
+            foundContact
+        }
+    )}
+    catch(error)
+    {
+        res.status(500).json({success:false,
+            message:"Server Error",
+            error:error.message
+        })
     }
 }
