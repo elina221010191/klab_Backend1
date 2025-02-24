@@ -37,6 +37,7 @@
     "nodemon": "^3.0.1",
     "passport": "^0.7.0",
     "passport-google-oauth20": "^2.0.0",
+    "path": "^0.12.7",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1",
     "twilio": "^4.20.0",
@@ -45,6 +46,6 @@
   "devDependencies": {
     "@babel/core": "^7.23.3",
     "@babel/preset-env": "^7.23.3",
-    "cors":"^2.8.5"
+    "cors": "^2.8.5"
   }
 }

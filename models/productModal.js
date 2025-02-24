@@ -7,7 +7,7 @@ const productSchema=new Schema(
         required:true
       },
         productPrice:{
-            type:integer,
+            type:Number,
             required:true
       },
       productCategory:{
@@ -15,14 +15,14 @@ const productSchema=new Schema(
         required:true
       },
       productDiscount:{
-        type:integer,
+        type:Number,
         required:true,
         default:0
   },
     productImage:{
         url:{
         type:String,
-        required:true
+        required:false
         }
   }
 },
@@ -30,6 +30,6 @@ const productSchema=new Schema(
   timestamps:true
 }
 )
-const Contact=model("Product",productSchema)
-export default Product;
+const ProductModel=model("Product",productSchema)
+export default ProductModel;
 
