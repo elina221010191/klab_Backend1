@@ -1,8 +1,9 @@
 import {AddProduct,getAllProduct, getProductById,DeleteById,UpdatedProductById} from "../controllers/productController.js"
-import upload from "../middlewares/multer.js"
+import configureMulter from "../utils/multer.js";
 import express from "express";
 const ProductRoute=express.Router();
-ProductRoute.post("/addProduct",AddProduct);
+const upload = configureMulter();
+ProductRoute.post("/addProduct",upload,AddProduct);
 ProductRoute.get("/getAllProduct",getAllProduct);
 ProductRoute.get("/getProductById/:id",getProductById);
 ProductRoute.delete("/DeleteById/:id",DeleteById)

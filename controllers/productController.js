@@ -1,9 +1,15 @@
-import cloudinary from "../utils/multer.js"
 import ProductModel from "../models/productModal.js"
+import {cloudinary } from "../utils/cloudinaryConfig.js"
 import path from 'path'
 export const AddProduct = async (req, res, next) => {
+
     try {
-    
+      if(!req.files.images || req.files.images.length===0){
+        return res.status(400).json({success:false,message:"No image uploaded"});
+      }
+// Upload the first image to Cloudinary
+      const result = await cloudinary.uploader.upload(req.files.images[0].path);
+      const images = result.secure_url;
     //   if (!req.file) {
     //     return res.status(400).json({ error: "Image file is required" });
     //   }
@@ -26,6 +32,7 @@ export const AddProduct = async (req, res, next) => {
         productPrice: req.body.productPrice,
         productCategory: req.body.productCategory,
         productDiscount:req.body.productDiscount,
+        images,
         // productImage: {
         //   url: result.url,
         // },
