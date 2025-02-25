@@ -1,4 +1,4 @@
-import cloudinary from "../utils/cloudinary.js"
+import cloudinary from "../utils/multer.js"
 import ProductModel from "../models/productModal.js"
 import path from 'path'
 export const AddProduct = async (req, res, next) => {
