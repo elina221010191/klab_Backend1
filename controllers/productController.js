@@ -4,28 +4,15 @@ import path from 'path'
 export const AddProduct = async (req, res, next) => {
 
     try {
+      //ensure files are uploaded before accessing them
       if(!req.files.images || req.files.images.length===0){
         return res.status(400).json({success:false,message:"No image uploaded"});
       }
 // Upload the first image to Cloudinary
       const result = await cloudinary.uploader.upload(req.files.images[0].path);
+      
+      //get the secure image URL
       const images = result.secure_url;
-    //   if (!req.file) {
-    //     return res.status(400).json({ error: "Image file is required" });
-    //   }
-  
-    //   const filePath = path.resolve(req.file.path); // Convert to absolute path
-  
-    //   const result = await cloudinary.uploader.upload(filePath, {
-    //     use_filename: true,
-    //     unique_filename: false,
-    //     overwrite: true,
-    //   });
-  
-  
-    //   if (!result || !result.url) {
-    //     throw new Error("Failed to upload image to Cloudinary");
-    //   }
   
       const product = new ProductModel({
         productName: req.body.productName,
@@ -33,13 +20,10 @@ export const AddProduct = async (req, res, next) => {
         productCategory: req.body.productCategory,
         productDiscount:req.body.productDiscount,
         images,
-        // productImage: {
-        //   url: result.url,
-        // },
       });
   
       const savedProduct = await product.save();
-    //   console.log("Product saved successfully:", savedProduct);
+    
   
       return res.status(201).json({
         message: "Product created successfully",
