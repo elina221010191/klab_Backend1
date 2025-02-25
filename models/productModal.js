@@ -20,10 +20,8 @@ const productSchema=new Schema(
         default:0
   },
     productImage:{
-        url:{
-        type:String,
-        required:false
-        }
+        type:Array,
+        required:false,
   }
 },
 {

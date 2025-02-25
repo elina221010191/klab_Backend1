@@ -69,7 +69,7 @@ export const AddProduct = async (req, res, next) => {
   export const DeleteById=async(req,res)=>{
     try{
         const {id}=req.params;
-        const product=await ProductModel.DeleteById(id)
+        const product=await ProductModel.findByIdAndDelete(id)
         if(!product){
             res.status(404).json({success:false,message:"internal server error",error:error.message})
         }
