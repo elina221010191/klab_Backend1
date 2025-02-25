@@ -19,7 +19,7 @@ const productSchema=new Schema(
         required:true,
         default:0
   },
-    productImage:{
+    images:{
         type:Array,
         required:false,
   }

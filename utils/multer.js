@@ -36,7 +36,7 @@ const storage = new CloudinaryStorage({
     return {
       folder: folder, // The folder in Cloudinary where files will be uploaded
       resource_type: "auto", // Automatically detect file type
-      public_id: ${Date.now()}-${file.originalname.split(".")[0]}, // Custom file name
+      public_id: `${Date.now()}-${file.originalname.split(".")[0]}`, // Custom file name
     };
   },
 });
@@ -55,8 +55,8 @@ const configureMulter = () => {
             "application/msword",
             "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
           ],
-          images: ["image/jpeg", "image/png", "image/gif"],
-          imagePreview: ["image/jpeg", "image/png"], // Specify allowed formats for imagePreview
+          images: ["image/jpeg", "image/png", "image/gif","image/webp","image/jpg"],
+          imagePreview: ["image/jpeg", "image/png","image/webp","image/jpg"], // Specify allowed formats for imagePreview
         };
   
         // Check if the file type is allowed
