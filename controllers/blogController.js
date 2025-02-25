@@ -90,51 +90,53 @@ export const AddBlog = async (req, res, next) => {
 //       return res.status(500).json({ error: error.message });
 //     }
 //   };
-//   export const getAllProduct= async(req,res)=>{
-//     try{
-//         const product= await ProductModel.find();
-//         res.status(200).json({success:true,product})
+  export const getAllBlog= async(req,res)=>{
+    try{
+        const blog= await BlogModel.find();
+        res.status(200).json({success:true, message:"ALL blog",blog})
     
-//     }
-//     catch(error){
-//     res.status(404).json({success:false,message:"internal server",error:error.message})
-//     }
-//   }
-//   export const getProductById=async(req,res)=>{
-//     try{
-//         const {id}=req.params;
-//         const blog= await BlogModel.findById(id);
-//         if(!blog){
-//             res.status(404).json({success:false,message:"internal",error:error.message})
-//         }
-//       return   res.status(200).json({success:true,message:"blog found"})
-//     }
-//     catch(error){
-//         res.status(404).json({success:false,message:"internal server error",error:error.message})
-//     }
-//   }
-//   export const DeleteById=async(req,res)=>{
-//     try{
-//         const {id}=req.params;
-//         const product=await ProductModel.findByIdAndDelete(id)
-//         if(!product){
-//             res.status(404).json({success:false,message:"internal server error",error:error.message})
-//         }
-//         return res.status(200).json({success:true,message:"product deleted"})
-//     }
-//     catch(error){
-//         res.status(404).json({success:false,message:"internal server error",error:error.message})
-// }
-//   }
-//   export const UpdatedProductById=async(req,res)=>{
-//     try{
-//         const {id}=req.params;
-//    const product=await ProductModel.findByIdAndUpdate(id,req.body);
-//    return res.status(200).json({success:true,message:"updated successfully"})
+    }
+    catch(error){
+    res.status(404).json({success:false,message:"internal server",error:error.message})
+    }
+  }
 
-//     }
-//     catch(error){
-//         res.status(404).json({success:false,messagae:"internal server",error:error.message})
-//     }
-//   }
+  export const getBlogById=async(req,res)=>{
+    try{
+        const {id}=req.params;
+        const blog=await BlogModel.findBlogById(id);
+        if(!blog){
+          res.status(404).json({success:false,message:"internal"})
+        }
+        return res.status(200).json({success:true,message:"blog get by selected Id",blog})
+    }
+    catch(error){
+      res.status(404).json({success:true,message:"internal server",error:error.message})
+    }
+  }
+  
+  export const DeleteById=async(req,res)=>{
+    try{
+        const {id}=req.params;
+        const blog=await BlogModel.findByIdAndDelete(id)
+        if(!blog){
+            res.status(404).json({success:false,message:"internal server error",error:error.message})
+        }
+        return res.status(200).json({success:true,message:"blog deleted"})
+    }
+    catch(error){
+        res.status(404).json({success:false,message:"internal server error",error:error.message})
+}
+  }
+  export const UpdatedById=async(req,res)=>{
+    try{
+        const {id}=req.params;
+   const blog=await BlogModel.findByIdAndUpdate(id,req.body);
+   return res.status(200).json({success:true,message:"updated blog successfully"})
+
+    }
+    catch(error){
+        res.status(404).json({success:false,messagae:"internal server",error:error.message})
+    }
+  }
 
