@@ -160,7 +160,7 @@ export const AddBlog = async (req, res, next) => {
        }
  
        // Update the blog with new data
-       const updatedBlog = await blog.findByIdAndUpdate(id, updatedFields, { new: true });
+       const updatedBlog = await BlogModel.findByIdAndUpdate(id, updatedFields, { new: true });
  
        return res.status(200).json({ success: true, message: "Blog updated successfully", blog: updatedBlog });
  
