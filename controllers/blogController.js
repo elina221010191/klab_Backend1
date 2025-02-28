@@ -128,15 +128,44 @@ export const AddBlog = async (req, res, next) => {
         res.status(404).json({success:false,message:"internal server error",error:error.message})
 }
   }
-  export const UpdatedById=async(req,res)=>{
-    try{
-        const {id}=req.params;
-   const blog=await BlogModel.findByIdAndUpdate(id,req.body);
-   return res.status(200).json({success:true,message:"updated blog successfully"})
+  // export const UpdatedById=async(req,res)=>{
+  //   try{
+  //       const {id}=req.params;
+  //  const blog=await BlogModel.findByIdAndUpdate(id,req.body);
+  //  return res.status(200).json({success:true,message:"updated blog successfully"})
 
-    }
-    catch(error){
-        res.status(404).json({success:false,messagae:"internal server",error:error.message})
-    }
-  }
+  //   }
+  //   catch(error){
+  //       res.status(404).json({success:false,messagae:"internal server",error:error.message})
+  //   }
+  // }
+
+  export const updateBlogById = async (req, res) => {
+    try {
+       const { id } = req.params;
+ 
+       // Find the existing blog
+       const blog = await BlogModel.findById(id);
+       if (!blog) {
+          return res.status(404).json({ success: false, message: "Blog not found" });
+       }
+ 
+       let updatedFields = req.body;
+ 
+       // Check if a new image was uploaded
+       if (req.files && req.files.images && req.files.images.length > 0) {
+          // Upload new image to Cloudinary
+          const result = await cloudinary.uploader.upload(req.files.images[0].path);
+          updatedFields.images = result.secure_url; // Update the image URL
+       }
+ 
+       // Update the blog with new data
+       const updatedBlog = await blog.findByIdAndUpdate(id, updatedFields, { new: true });
+ 
+       return res.status(200).json({ success: true, message: "Blog updated successfully", blog: updatedBlog });
+ 
+    } catch (error) {
+       res.status(500).json({ success: false, message: "Server Error", error: error.message });
+    }
+};
 
