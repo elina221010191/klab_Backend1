@@ -25,7 +25,7 @@
 //     }
 // }
 
-import User from "../models/userModals.js"
+import User from "../models/userModal.js"
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken"
 
@@ -46,7 +46,7 @@ export const Register = async (req, res) => {
         });
 
         await user.save();
-        const token = jwt.sign({id:user.id,role:user.userRole },process.env.JWT_SECRET_KEY, {expiresIn:'1h'});
+        const token = jwt.sign({id:user.id,userRole:user.userRole },process.env.JWT_SECRET_KEY, {expiresIn:'1h'});
         res.status(201).json({
             message: "Account created successfully!",
             user: {
