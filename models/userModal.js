@@ -7,5 +7,5 @@ const UserSchema = new mongoose.Schema({
     userRole: { type: String, enum: ["admin", "user"], default: "user" }  // Ensure default role
 });
 
-const User = mongoose.model("User", UserSchema);
+const User = mongoose.model("users", UserSchema);
 export default User;
